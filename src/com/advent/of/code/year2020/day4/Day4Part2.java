@@ -13,8 +13,8 @@ public class Day4Part2 {
       String[] parts = passport.split(" ");
       if (parts.length < 7) continue; // Invalid passport confirmed
       Map<String, String> passportMap = new HashMap<>();
-      for (int i = 0; i < parts.length; i++) {
-        String[] keyValue = parts[i].split(":");
+      for (String part : parts) {
+        String[] keyValue = part.split(":");
         passportMap.put(keyValue[0], keyValue[1]);
       }
       if (isValid(passportMap)) {
@@ -41,11 +41,8 @@ public class Day4Part2 {
           String hcl = passportMap.get("hcl");
           String ecl = passportMap.get("ecl");
           String pid = passportMap.get("pid");
-          if (isValidBirth(byr) && isValidIssue(iyr) && isValidExpiration(eyr) && isValidHeight(hgt)
-              && isValidHair(hcl) && isValidEye(ecl) && isValidPid(pid)) {
-            return true;
-          }
-          return false;
+          return isValidBirth(byr) && isValidIssue(iyr) && isValidExpiration(eyr) && isValidHeight(
+              hgt) && isValidHair(hcl) && isValidEye(ecl) && isValidPid(pid);
         } catch (Exception e) {
           return false;
         }
@@ -66,9 +63,8 @@ public class Day4Part2 {
   }
 
   private static boolean isValidEye(String ecl) {
-      if (ecl.contains("amb") || ecl.contains("blu") || ecl.contains("brn") || ecl.contains("gry")
-      || ecl.contains("hzl") || ecl.contains("oth") || ecl.contains("grn")) return true;
-      return false;
+    return ecl.contains("amb") || ecl.contains("blu") || ecl.contains("brn") || ecl.contains("gry")
+           || ecl.contains("hzl") || ecl.contains("oth") || ecl.contains("grn");
   }
 
   private static boolean isValidHair(String hcl) {
@@ -93,30 +89,25 @@ public class Day4Part2 {
   private static boolean isValidHeight(String hgt) {
     if (hgt.contains("cm")) {
       int ht = Integer.parseInt(hgt.replaceFirst("cm", ""));
-      if (ht >= 150 && ht <= 193) return true;
-      return false;
+      return ht >= 150 && ht <= 193;
     }
     if (hgt.contains("in")) {
       int ht = Integer.parseInt(hgt.replaceFirst("in", ""));
-      if (ht >= 59 && ht <= 76) return true;
-      return false;
+      return ht >= 59 && ht <= 76;
     }
     return false;
   }
 
   private static boolean isValidExpiration(int eyr) {
-      if (eyr >= 2020 && eyr <= 2030) return true;
-      return false;
+    return eyr >= 2020 && eyr <= 2030;
   }
 
   private static boolean isValidIssue(int iyr) {
-      if (iyr >= 2010 && iyr <= 2020) return true;
-      return false;
+    return iyr >= 2010 && iyr <= 2020;
   }
 
   private static boolean isValidBirth(int byr) {
-      if (byr >= 1920 && byr <= 2002) return true;
-      return false;
+    return byr >= 1920 && byr <= 2002;
   }
 
 }
