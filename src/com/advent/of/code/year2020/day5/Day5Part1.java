@@ -1,8 +1,6 @@
 package com.advent.of.code.year2020.day5;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Day5Part1 {
 
@@ -11,7 +9,7 @@ public class Day5Part1 {
    int max = 0;
    for (String pass: boardingPasses) {
      int row = calculateRow(pass.substring(0, 7));
-     int column = calculateColumn(pass.substring(7, 9));
+     int column = calculateColumn(pass.substring(7, 10));
      int seatId = (row * 8) + column;
      if (seatId > max) {
        max = seatId;
